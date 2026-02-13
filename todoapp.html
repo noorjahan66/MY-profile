@@ -1,0 +1,368 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <title>to do list</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+  <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;600&display=swap" rel="stylesheet">
+  <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+
+  <style>
+    :root{
+      --bg1:#ff9ff3;
+      --bg2:#48dbfb;
+      --bg3:#feca57;
+      --glass:rgba(255,255,255,0.25);
+      --text:#fff;
+    }
+
+    body{
+      margin:0;
+      font-family:'Poppins',sans-serif;
+      height:100vh;
+      display:flex;
+      justify-content:center;
+      align-items:center;
+      background:linear-gradient(-45deg,var(--bg1),var(--bg2),var(--bg3),#c471ed);
+      background-size:400% 400%;
+      animation:bgMove 12s ease infinite;
+      color:var(--text);
+    }
+
+    @keyframes bgMove{
+      0%{background-position:0% 50%;}
+      50%{background-position:100% 50%;}
+      100%{background-position:0% 50%;}
+    }
+
+    .container{
+      width:470px;
+      max-width:95%;
+      padding:25px;
+      border-radius:20px;
+      backdrop-filter:blur(20px);
+      background:var(--glass);
+      box-shadow:0 0 40px rgba(255,255,255,0.4);
+    }
+
+    h2{text-align:center;}
+
+    .input-row{
+      display:flex;
+      flex-wrap:wrap;
+      justify-content:center;
+      gap:8px;
+      margin-top:10px;
+    }
+
+    input,select,textarea,button{
+      font-size:14px;
+      padding:8px;
+      border-radius:10px;
+      border:none;
+    }
+
+    input, select, textarea{
+      flex:1;
+      min-width:80px;
+    }
+
+    textarea{
+      resize:none;
+    }
+
+    button{
+      width:120px;
+      height:40px;
+      background:#ff6ec7;
+      color:white;
+      cursor:pointer;
+      transition:0.3s;
+    }
+
+    button:hover{
+      background:#00e6ff;
+      transform:scale(1.05);
+    }
+
+    ul{
+      list-style:none;
+      padding:0;
+      max-height:250px;
+      overflow-y:auto;
+      margin-top:10px;
+    }
+
+    li{
+      background:rgba(255,255,255,0.3);
+      margin-top:8px;
+      padding:8px;
+      border-radius:12px;
+      font-size:14px;
+    }
+
+    .completed{
+      text-decoration:line-through;
+      opacity:0.6;
+    }
+
+    .meta{
+      font-size:11px;
+      margin-top:4px;
+    }
+
+    .desc{
+      font-size:12px;
+      font-style:italic;
+      margin-top:4px;
+    }
+
+    .counter{
+      margin-top:10px;
+      font-size:14px;
+      text-align:center;
+    }
+
+    .dark{
+      --glass:rgba(0,0,0,0.4);
+      --text:#fff;
+    }
+
+    @media(max-width:480px){
+      .input-row{
+        flex-direction:column;
+        align-items:center;
+      }
+
+      button{
+        width:100%;
+      }
+
+      input, select, textarea{
+        width:100%;
+      }
+    }
+  </style>
+</head>
+
+<body>
+<div class="container" id="container">
+
+  <h2>📝  To Do List ✨</h2>
+
+  <button onclick="toggleMode()">🌈   Themes    🌙</button>
+
+  <div class="input-row">
+    <input type="text" id="taskInput" placeholder="your task..."><br>
+    <textarea id="taskDesc" placeholder="Description..." rows="1"></textarea>
+   <br> <input type="date" id="dueDate">
+    <br>
+    <select id="category" onchange="updateSubcategory()">
+      <option value="">Category</option>
+      <option value="Work">Work</option>
+      <option value="Study">Study</option>
+      <option value="Personal">Personal</option>
+    </select>
+<br>
+    <select id="subcategory">
+      <option value="">Subcategory</option>
+    </select>
+<br>
+    <button onclick="addTask()">Add ✨</button><br>
+    <button onclick="moreTask()">More ✨</button>
+  </div>
+
+  <ul id="taskList"></ul>
+
+  <div class="counter" id="counter"></div>
+
+  <canvas id="chart" height="150"></canvas>
+
+</div>
+
+<audio id="sound">
+  <source src="https://assets.mixkit.co/sfx/preview/mixkit-fairy-magic-sparkle-871.mp3">
+</audio>
+
+<script>
+const taskInput=document.getElementById("taskInput");
+const taskDesc=document.getElementById("taskDesc");
+const dueDate=document.getElementById("dueDate");
+const category=document.getElementById("category");
+const subcategory=document.getElementById("subcategory");
+const taskList=document.getElementById("taskList");
+const counter=document.getElementById("counter");
+const sound=document.getElementById("sound");
+
+const subcategoriesMap = {
+  Work: ["Emails","Meetings","Reports","Calls"],
+  Study: ["write","reading","novels","Languages"],
+  Personal: ["Shopping","Exercise","Chores","Hobbies"]
+};
+
+function updateSubcategory(){
+  const cat = category.value;
+  subcategory.innerHTML = '<option value="">Subcategory</option>';
+  if(subcategoriesMap[cat]){
+    subcategoriesMap[cat].forEach(sub=>{
+      const option = document.createElement("option");
+      option.value = sub;
+      option.textContent = sub;
+      subcategory.appendChild(option);
+    });
+  }
+}
+
+let tasks=JSON.parse(localStorage.getItem("godTasks"))||[];
+
+function saveTasks(){
+  localStorage.setItem("godTasks",JSON.stringify(tasks));
+}
+
+function renderTasks(){
+  taskList.innerHTML="";
+  tasks.forEach((task,index)=>{
+    const li=document.createElement("li");
+
+    const title=document.createElement("div");
+    title.textContent=task.text;
+    if(task.completed) title.classList.add("completed");
+    title.onclick=()=>{
+      task.completed=!task.completed;
+      saveTasks();
+      renderTasks();
+      updateChart();
+    };
+
+    const meta=document.createElement("div");
+    meta.className="meta";
+    meta.innerHTML=`📅 ${task.date||"No date"} | 🗂 ${task.category} → ${task.subcategory||"None"}`;
+
+    const desc=document.createElement("div");
+    desc.className="desc";
+    desc.textContent = task.description || "";
+
+    const del=document.createElement("span");
+    del.textContent=" ❌";
+    del.style.cursor="pointer";
+    del.onclick=()=>{
+      tasks.splice(index,1);
+      saveTasks();
+      renderTasks();
+      updateChart();
+    };
+
+    li.appendChild(title);
+    li.appendChild(meta);
+    li.appendChild(desc);
+    li.appendChild(del);
+    taskList.appendChild(li);
+  });
+
+  updateCounter();
+}
+
+function addTask(){
+  const text=taskInput.value.trim();
+  if(!text) return;
+
+  tasks.push({
+    text:text,
+    description:taskDesc.value.trim(),
+    date:dueDate.value,
+    category:category.value || "None",
+    subcategory:subcategory.value || "None",
+    completed:false
+  });
+
+  sound.play();
+  saveTasks();
+  renderTasks();
+  updateChart();
+  taskInput.value="";
+  taskDesc.value="";
+}
+
+function moreTask(){
+  const cat = category.value;
+  const sub = subcategory.value;
+
+  if(!cat || !sub) return alert("Select category & subcategory first!");
+
+  const suggestions = {
+    Work: {
+      Emails: ["Reply to client emails", "Sort inbox", "Follow up with manager"],
+      Meetings: ["Team sync-up", "Project standup", "Client call"],
+      Reports: ["Monthly report draft", "Sales summary", "Update KPI report"],
+      Calls: ["Call supplier", "Call client", "Check voicemail"]
+    },
+    Study: {
+      write: ["Solve equations", "home work", "handwriting practice"],
+      reading: ["Read chapter ", "Lab preparation", "notes"],
+      novels: ["Read 20 pages", "Summarize key points", "Highlight quotes"],
+      Languages: ["Practice vocabulary", "Write a short essay", "Listen to audio lesson"]
+    },
+    Personal: {
+      Shopping: ["Buy groceries", "Order gift online", "Check supplies"],
+      Exercise: ["30 min yoga", "Run 3 km", "Stretching routine"],
+      Chores: ["Clean room", "Wash dishes", "Laundry"],
+      Hobbies: ["Draw for 30 min", "Practice guitar", "Write journal"]
+    }
+  };
+
+  const selectedSuggestions = suggestions[cat][sub] || [];
+  if(selectedSuggestions.length === 0) return alert("No suggestions available!");
+
+  selectedSuggestions.forEach(text => {
+    tasks.push({
+      text: text,
+      description: "",
+      date: dueDate.value,
+      category: cat,
+      subcategory: sub,
+      completed: false
+    });
+  });
+
+  sound.play();
+  saveTasks();
+  renderTasks();
+  updateChart();
+}
+
+function updateCounter(){
+  const total=tasks.length;
+  const done=tasks.filter(t=>t.completed).length;
+  const percent=total?Math.round((done/total)*100):0;
+  counter.innerHTML=`✨ ${done}/${total} Completed (${percent}%)`;
+}
+
+function toggleMode(){
+  document.getElementById("container").classList.toggle("dark");
+}
+
+/* Chart */
+const ctx=document.getElementById("chart");
+const chart=new Chart(ctx,{
+  type:'doughnut',
+  data:{
+    labels:['Completed','Pending'],
+    datasets:[{
+      data:[0,0],
+      backgroundColor:['#00ffcc','#ff66cc']
+    }]
+  }
+});
+
+function updateChart(){
+  const total=tasks.length;
+  const done=tasks.filter(t=>t.completed).length;
+  chart.data.datasets[0].data=[done,total-done];
+  chart.update();
+}
+
+renderTasks();
+updateChart();
+</script>
+</body>
+</html>
