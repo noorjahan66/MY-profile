@@ -1,0 +1,293 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Noor | Web Developer</title>
+<head>
+<style>
+/* Import Google Fonts */
+@import url('https://fonts.googleapis.com/css2?family=Orbitron:wght@700&family=Roboto:wght@400;500&display=swap');
+
+*{
+    margin:0;
+    padding:0;
+    box-sizing:border-box;
+    font-family: 'Roboto', sans-serif;
+}
+
+body{
+    background:black;
+    color:#00FF7F; /* Neon green */
+    line-height:1.6;
+    overflow-x:hidden;
+}
+
+/* Floating Background Images */
+.bg-img{
+    position:fixed;
+    width:120px;
+    opacity:0.4;
+    z-index:-1;
+    animation:float 8s ease-in-out infinite;
+}
+
+.bg1{ top:10%; left:5%; }
+.bg2{ top:60%; right:5%; animation-delay:2s; }
+.bg3{ bottom:10%; left:40%; animation-delay:4s; }
+.bg4{ top:30%; right:40%; animation-delay:6s; }
+
+@keyframes float{
+    0%{ transform:translateY(0px);}
+    50%{ transform:translateY(-30px);}
+    100%{ transform:translateY(0px);}
+}
+
+/* Container */
+.container{
+    width:90%;
+    max-width:1200px;
+    margin:auto;
+    font-size:50px";
+}
+/* Header */
+header{
+    background:black;
+    padding:20px 0;
+    border-bottom:2px solid #00FF7F;
+}
+
+.header-content{
+    display:flex;
+    justify-content:space-between;
+    align-items:center;
+}
+
+header h1{
+    font-family: 'Orbitron', sans-serif;
+    font-weight:700;
+    font-size:28px;
+    color:#00FF7F;
+    text-shadow: 0 0 10px #00FF7F;
+}
+
+nav a{
+    color:#00FF7F;
+    margin-left:20px;
+    text-decoration:none;
+    font-weight:500;
+    transition:0.3s;
+}
+
+nav a:hover{
+    color:black;
+    background:#00FF7F;
+    padding:5px 12px;
+    border-radius:5px;
+}
+
+/* Sections */
+section{
+    padding:100px 0;
+}
+
+/* Hero */
+.hero-content{
+    display:flex;
+    justify-content:space-between;
+    align-items:center;
+    gap:40px;
+}
+
+.hero-text h2{
+    font-family: 'Orbitron', sans-serif;
+    font-size:48px;
+    color:#00FF7F;
+    text-shadow: 0 0 10px #00FF7F;
+}
+
+.hero-text span{
+    color:#ADFF2F;
+}
+
+.hero-text p{
+    font-size:25px;
+    margin-top:10px;
+    color:#00FF7F;
+}
+
+.btn{
+    display:inline-block;
+    margin-top:20px;
+    padding:12px 25px;
+    background:#00FF7F;
+    color:black;
+    font-size:50px";
+    text-decoration:none;
+    border-radius:40px;
+    font-weight:550;
+    transition:0.3s;
+}
+
+.btn:hover{
+    background:black;
+    color:#00FF7F;
+    border:2px solid #00FF7F;
+}
+
+/* Hero Image */
+.hero-img img{
+    width:400px;
+    border-radius:15px;
+    animation:zoom 5s infinite alternate;
+}
+
+@keyframes zoom{
+    from{ transform:scale(1);}
+    to{ transform:scale(1.05);}
+}
+
+/* Projects */
+.projects{
+    display:grid;
+    grid-template-columns:repeat(auto-fit,minmax(280px,1fr));
+    gap:30px;
+    margin-top:40px;
+}
+
+.card{
+    background:#111;
+    font-size:30px";
+    color:#00FF7F;
+    padding:20px;
+    border-radius:10px;
+    box-shadow:0 0 10px rgba(0,255,127,0.4);
+    transition:0.4s;
+}
+
+.card:hover{
+    transform:translateY(-10px);
+    background:#1a1a1a;
+    box-shadow:0 0 20px #00FF7F;
+}
+
+.card img{
+    width:100%;
+    border-radius:8px;
+    margin-bottom:10px;
+    transition:0.4s;
+}
+
+.card img:hover{
+    transform:scale(1.05);
+}
+
+/* Footer */
+footer{
+  font-size:30px";
+    text-align:center;
+    padding:20px;
+    background:black;
+    color:#00FF7F;
+    font-weight:500;
+    border-top:2px solid #00FF7F;
+}
+
+/* Responsive */
+@media(max-width:900px){
+    .hero-content{
+        flex-direction:column;
+        text-align:center;
+    }
+    .hero-img img{
+        width:100%;
+        max-width:300px;
+    }
+}
+</style>
+</head>
+
+<body>
+
+<!-- Floating Background Icons -->
+<img src="https://cdn-icons-png.flaticon.com/512/919/919827.png" class="bg-img bg1">
+<img src="https://cdn-icons-png.flaticon.com/512/919/919851.png" class="bg-img bg2">
+<img src="https://cdn-icons-png.flaticon.com/512/919/919836.png" class="bg-img bg3">
+<img src="https://cdn-icons-png.flaticon.com/512/919/919830.png" class="bg-img bg4">
+<header>
+<div class="container header-content">
+    <h1> NOOR JAHAN </h1>
+   <h3>
+    <nav>
+        <a href="#about">About</a>
+        <a href="#projects">Projects</a>
+        <a href="#contact">Contact</a>
+    </nav></h3>
+</div>
+</header>
+
+<section>
+<div class="container hero-content">
+    <div class="hero-text">
+        <h2>Hello, I'm <span><br><center>𝐍𝖔𝖔𝖗 𝖏𝖆𝖍𝖆𝖓</center> </span></h2>
+        <p>Frontend Web Developer | BCA Graduate</p><br>
+        <a href="#projects" class="btn">View My Work</a>
+    </div>
+    <div class="hero-img">
+        <img src="developer.jpg" alt="Developer"><br><br><p><b><center>Web Developer</center></b></p>
+    </div>
+</div>
+</section>
+
+<section id="about">
+<div class="container">
+    <h1>About Me</h1>
+    <p style="margin-top:20px; max-width:700px;font-size:30px">
+        I am a passionate web developer skilled in HTML, CSS, JavaScript, and React.
+        I enjoy building modern and responsive websites.
+    </p>
+</div>
+</section>
+
+<section id="projects">
+<div class="container">
+    <h1>My Projects</h1>
+<div class="projects">
+        <div class="card">
+            <img src="e-commerce.png" alt="ecommerce">
+            <h3>E-commerce Website</h3>
+            <p>Responsive E-commerce Website using HTML, CSS, JS.</p>
+        </div>
+        <div class="card">
+            <img src="todo.png" alt="">
+            <h3>To-Do Website</h3><br>
+            <p>JavaScript To-Do Website with Local Storage.</p>
+             <nav><center>
+<a href="todoapp.html">click to visit</a>
+</center></nav>
+        </div>
+        <div class="card">
+            <img src="whether.png" alt="">
+            <h3>Weather App</h3>
+            <p>Weather App using API integration.</p>
+        </div>
+    </div>
+</div>
+</section>
+
+<section id="contact">
+<div class="container">
+    <h2>Contact Me</h2>
+    <p>Email: <a href="noorjahan.66002@gmail.com">noorjahan.66002@gmail.com</a></p>
+    <p>LinkedIn: <a href="https://www.linkedin.com/in/noor-jahan-01154734b?utm_source=share&utm_campaign=share_via&utm_content=profile&utm_medium=android_app">LinkedIn</a></p>
+    <p>GitHub: <a href="github.com/noorjahan66">GitHub</a></a></p>
+</div>
+</section>
+
+<footer><center>
+ ◉⁠‿Thank you ｡⁠◕<br>© Noor
+ </center>
+</footer>
+
+</body>
+</html>
