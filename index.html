@@ -1,0 +1,421 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Noor | Web Developer</title>
+
+<style>
+@import url('https://fonts.googleapis.com/css2?family=Orbitron:wght@700&family=Roboto:wght@400;500&display=swap');
+
+*{
+margin:0;
+padding:0;
+box-sizing:border-box;
+font-family:'Roboto',sans-serif;
+}
+
+body{
+background:black;
+color:#00FF7F;
+line-height:1.6;
+overflow-x:hidden;
+}
+
+.bg-img{
+position:fixed;
+width:120px;
+opacity:0.4;
+z-index:-1;
+animation:float 8s ease-in-out infinite;
+}
+
+.bg1{top:10%;left:5%;}
+.bg2{top:60%;right:5%;animation-delay:2s;}
+.bg3{bottom:10%;left:40%;animation-delay:4s;}
+.bg4{top:30%;right:40%;animation-delay:6s;}
+
+@keyframes float{
+0%{transform:translateY(0);}
+50%{transform:translateY(-30px);}
+100%{transform:translateY(0);}
+}
+
+.container{
+width:90%;
+max-width:1200px;
+margin:auto;
+}
+
+header{
+background:black;
+padding:20px 0;
+border-bottom:2px solid #00FF7F;
+}
+
+.header-content{
+display:flex;
+justify-content:space-between;
+align-items:center;
+}
+
+header h1{
+font-family:'Orbitron',sans-serif;
+font-size:30px;
+color:#00FF7F;
+text-shadow:0 0 10px white;
+}
+
+h1{
+font-family:'Orbitron',sans-serif;
+font-size:40px;
+color:#00FF7F;
+text-shadow:0 0 7px white;
+}
+
+h3{
+font-family:'Orbitron',sans-serif;
+font-size:30px;
+color:#00FF7F;
+text-shadow:0 0 3px white;
+}
+
+p{
+font-size:20px;
+color:white;
+text-shadow:0 0 4px #00FF7F;
+}
+
+nav a{
+color:#00FF7F;
+margin-left:20px;
+text-decoration:none;
+font-weight:500;
+transition:0.3s;
+}
+
+nav a:hover{
+color:black;
+background:#00FF7F;
+padding:5px 12px;
+border-radius:5px;
+}
+
+section{
+padding:100px 0;
+}
+
+#home{
+background:#222;
+color:white;
+padding:100px 20px;
+}
+
+.hero-content{
+display:flex;
+justify-content:space-between;
+align-items:center;
+gap:40px;
+}
+
+.hero-text h2{
+font-family:'Orbitron',sans-serif;
+font-size:48px;
+color:#00FF7F;
+text-shadow:0 0 10px #00FF7F;
+}
+
+.hero-text span{
+color:#ADFF2F;
+}
+
+.hero-text p{
+font-size:22px;
+margin-top:10px;
+color:#00FF7F;
+}
+
+.btn{
+display:inline-block;
+margin-top:20px;
+padding:12px 25px;
+background:#00FF7F;
+color:black;
+text-decoration:none;
+border-radius:40px;
+font-weight:600;
+transition:0.3s;
+}
+
+.btn:hover{
+background:black;
+color:#00FF7F;
+border:2px solid #00FF7F;
+}
+
+.hero-img img{
+width:400px;
+border-radius:50%;
+animation:zoom 5s infinite alternate;
+box-shadow:0 0 20px #00FF7F;
+}
+
+@keyframes zoom{
+from{transform:scale(1);}
+to{transform:scale(1.05);}
+}
+
+.card{
+background:#111;
+color:#00FF7F;
+padding:20px;
+border-radius:10px;
+box-shadow:0 0 10px rgba(0,255,127,0.4);
+transition:0.4s;
+}
+
+.card:hover{
+transform:translateY(-10px);
+background:#1a1a1a;
+box-shadow:0 0 20px #00FF7F;
+}
+
+.card img{
+width:100%;
+border-radius:8px;
+margin-bottom:10px;
+}
+
+.skills-container{
+display:flex;
+flex-wrap:wrap;
+justify-content:center;
+gap:10px;
+}
+
+.skill-card{
+background:black;
+color:#00FF7F;
+font-weight:700;
+font-size:20px;
+text-align:center;
+padding:15px 35px;
+border-radius:10px;
+box-shadow:0 0 10px white;
+}
+
+skill-card{
+background:black;
+color:#00FF7F;
+font-weight:200px;
+font-size:20px;
+text-align:center;
+padding:20px 25px;
+border-radius:8px;
+box-shadow:0 0 10px white;
+}
+
+footer{
+text-align:center;
+padding:20px;
+background:black;
+color:#00FF7F;
+font-weight:500;
+border-top:2px solid #00FF7F;
+}
+
+form input, form textarea{
+width:100%;
+padding:12px;
+margin:8px 0;
+border-radius:5px;
+border:1px solid #00FF7F;
+background:black;
+color:#00FF7F;
+font-size:16px;
+}
+
+form button{
+background:#00FF7F;
+color:black;
+padding:15px 25px;
+border:none;
+border-radius:40px;
+font-weight:600;
+cursor:pointer;
+transition:0.3s;
+}
+
+form button:hover{
+background:black;
+color:#00FF7F;
+border:2px solid #00FF7F;
+}
+
+@media(max-width:900px){
+.hero-content{
+flex-direction:column;
+text-align:center;
+}
+
+.hero-img img{
+width:100%;
+max-width:300px;
+}
+}
+</style>
+</head>
+
+<body>
+
+<img src="https://cdn-icons-png.flaticon.com/512/919/919827.png" class="bg-img bg1">
+<img src="https://cdn-icons-png.flaticon.com/512/919/919851.png" class="bg-img bg2">
+<img src="https://cdn-icons-png.flaticon.com/512/919/919836.png" class="bg-img bg3">
+<img src="https://cdn-icons-png.flaticon.com/512/919/919830.png" class="bg-img bg4">
+
+<header>
+<div class="container header-content">
+<h1>NOOR JAHAN</h1>
+<h5>
+<nav>
+<a href="#home">Home</a>
+<a href="#about">About</a>
+<a href="#projects">Projects</a>
+<a href="#experience">Experience</a>
+<a href="#services">Services</a>
+<a href="#resume">Resume</a>
+<a href="#contact">Contact</a>
+</nav>
+</h5>
+</div>
+</header>
+
+<section id="home">
+<div class="container hero-content">
+<div class="hero-text">
+<h2>Hello, I'm <br><span>Noor Jahan</span></h2>
+<p>Web Developer | BCA Graduate</p>
+<a href="#projects" class="btn">View My Work</a>
+</div>
+
+<div class="hero-img">
+<img src="developer.jpg" alt="Developer">
+<h2 style="text-align:center;margin-top:10px;">Web Developer</h2>
+</div>
+</div>
+</section>
+
+<section id="about">
+<div class="container">
+    <h1>About Me</h1>
+    <p style="margin-top:20px; max-width:700px;font-size:30px">
+        I am a passionate web developer skilled in HTML, CSS, JavaScript, and React.
+        I enjoy building modern and responsive websites.
+    </p>
+</div>
+</section>
+
+<section id="skills">
+<h1>My Skills</h1>
+<br>
+<div class="skills-container">
+  <h3>Web Development : &nbsp;</nsp></h3>
+<div class="skill-card">HTML</div>
+<div class="skill-card">CSS</div>
+<div class="skill-card">JavaScript</div>
+  <h3>Programming Languages : &nbsp;</h3>
+<div class="skill-card">Java</div>
+<div class="skill-card">Python</div>
+<div class="skill-card">C</div>
+  <h3>Tools & Platforms :&nbsp;</h3>
+<div class="skill-card">VS Code</div>
+<div class="skill-card">MS Office</div>
+<div class="skill-card">GitHub</div>
+<div class="skill-card">Git</div>
+
+</div>
+</section>
+
+<section id="projects">
+<div class="container">
+<h1>Projects</h1><br>
+<div class="projects">
+ <div class="card">
+            <img src="e-commerce.png" alt="ecommerce">
+            <h3>E-commerce Website</h3><br>
+            <p>Responsive E-commerce Website using HTML, CSS, JS.</p>
+        </div>
+        <div class="card">
+            <img src="todo.png" alt="">
+            <h3>To-Do Website</h3><br>
+            <p>JavaScript To-Do Website with Local Storage.</p>
+             <nav><center><br>
+<p><a href="todoapp.html">click to visit</a></p>
+</center></nav>
+        </div>
+        <div class="card">
+            <img src="whether.png" alt="">
+            <h3>Weather App</h3><br>
+            <p>Weather App using API integration.</p>
+        </div>
+    </div>
+    </div>
+</section>
+<section id="experience">
+<div class="container">
+<h1>Experience</h1><br>
+<div class="projects">
+<div class="card"><h3>Web Developer Intern</h3><p>Codec Technologies India| 2026</p></div>
+<div class="card"><h3>Freelancer</h3><p>Worked on Video Editing ,image Editing projects | Present</p></div>
+</div>
+</div>
+</section>
+<section id="services">
+<div class="container">
+<h1>Services</h1><br>
+<div class="projects">
+<div class="card"><h3>Web Development</h3><p>Responsive websites using HTML, CSS, JS, and React.</p></div>
+<div class="card"><h3>Editing</h3><p>Video,image editing </p></div>
+<div class="card"><h3>UI/UX Design</h3><p>Modern and user-friendly designs for websites and apps.</p></div>
+<div class="card"><h3>Web designs</h3><p>Website design using WordPress</p></div>
+</div>
+</div>
+</section>
+<section id="resume">
+<div class="container">
+<h1>Download Resume</h1>
+<a href="resume.pdf" download class="btn">Download PDF</a>
+</div>
+</section>
+
+<section id="contact">
+<div class="container">
+<h1>Contact Me</h1>
+<br><form action="https://formsubmit.co/noorjahan.66002@gmail.com" method="POST">
+  <h2>Contact Me</h2>
+  
+  <label for="name">Name:</label>
+  <input type="text" name="name" id="name" placeholder="Your Name" required>
+
+  <label for="email">Email:</label>
+  <input type="email" name="email" id="email" placeholder="Your Email" required>
+
+  <label for="message">Message:</label>
+  <textarea name="message" id="message" placeholder="Your Message" required></textarea>
+
+  <button type="submit">Send</button>
+</form>
+
+<p style="margin-top:20px;">Email: <a href="mailto:noorjahan.66002@gmail.com">noorjahan.66002@gmail.com</a></p>
+<p>LinkedIn: <a href="https://www.linkedin.com/in/noor-jahan-01154734b" target="_blank">LinkedIn Profile</a></p>
+<p>GitHub: <a href="https://github.com/noorjahan66" target="_blank">GitHub Profile</a></p>
+</div>
+</section>
+
+<footer>
+◉ Thank you ◉ <br>
+© Noor
+</footer>
+
+</body>
+</html>
